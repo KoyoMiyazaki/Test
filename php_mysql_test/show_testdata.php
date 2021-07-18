@@ -8,26 +8,33 @@
 </head>
 <body>
 <?php
-    // $users = array(
-    //     'bob', 'alice', 'tom', 'henry', 'kim', 'emily', 'sandy'
-    // );
-    // $tickets = array(
-    //     'AAA', 'BBB', 'CCC', 'DDD', 'EEE', 'FFF', 'GGG'
-    // );
-
     try {
         $dsn = "mysql:host=mysql;dbname=sample;";
         $db = new PDO($dsn, 'root', 'pass');
 
-        $sql = "SELECT * FROM data_table ;";
+        $sql = "SELECT max(page_no) as max_page_no FROM data_table ;";
+        
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $data = array();
+
+        $sql = "SELECT * FROM data_table WHERE page_no = :page_no;";
+        $stmt = $db->prepare($sql);
+        for($i = 1, $max = intval($result[0]["max_page_no"]); $i <= $max; $i++) {
+            $params = array(':page_no' => $i);
+            $stmt->execute($params);
+            array_push($data, $stmt->fetchAll(PDO::FETCH_ASSOC));
+            
+        }
+
     } catch (PDOException $e) {
         echo $e->getMessage();
         exit;
     }
-    var_dump($result[0]["name"]);
+    var_dump(count($data) * count($data[0]));
 ?>
 
 </body>

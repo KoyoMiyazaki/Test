@@ -5,83 +5,28 @@ try {
     $dsn = "mysql:host=mysql;dbname=sample;";
     $db = new PDO($dsn, 'root', 'pass');
 
-    $sql = "SELECT * FROM data_table ;";
+    // 最大ページ数を取得
+    $sql = "SELECT max(page_no) as max_page_no FROM data_table ;";
     $stmt = $db->prepare($sql);
     $stmt->execute();
-    $test_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // data_tableよりデータを取得
+    $sql = "SELECT * FROM data_table WHERE page_no = :page_no;";
+    $test_data = array();
+    $stmt = $db->prepare($sql);
+    for($i = 1, $max = intval($result[0]["max_page_no"]); $i <= $max; $i++) {
+        $params = array(':page_no' => $i);
+        $stmt->execute($params);
+        array_push($test_data, $stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+
 } catch (PDOException $e) {
     echo $e->getMessage();
     exit;
 }
 
-// $test_data = array(
-//     array('name' => 'bob', 'date' => '2021/06/01', 'ticket_no' => 'AAA', 'remarks' => ''),
-//     array('name' => 'alice', 'date' => '2021/06/02', 'ticket_no' => 'AAB', 'remarks' => ''),
-//     array('name' => 'tom', 'date' => '2021/06/03', 'ticket_no' => 'AAC', 'remarks' => ''),
-//     array('name' => 'henry', 'date' => '2021/06/04', 'ticket_no' => 'AAD', 'remarks' => ''),
-//     array('name' => 'kim', 'date' => '2021/06/05', 'ticket_no' => 'AAE', 'remarks' => ''),
-//     array('name' => 'emily', 'date' => '2021/06/06', 'ticket_no' => 'AAF', 'remarks' => ''),
-//     array('name' => 'sandy', 'date' => '2021/06/07', 'ticket_no' => 'AAG', 'remarks' => ''),
-
-//     array('name' => 'bob', 'date' => '2021/06/01', 'ticket_no' => 'AAA', 'remarks' => ''),
-//     array('name' => 'alice', 'date' => '2021/06/02', 'ticket_no' => 'AAB', 'remarks' => ''),
-//     array('name' => 'tom', 'date' => '2021/06/03', 'ticket_no' => 'AAC', 'remarks' => ''),
-//     array('name' => 'henry', 'date' => '2021/06/04', 'ticket_no' => 'AAD', 'remarks' => ''),
-//     array('name' => 'kim', 'date' => '2021/06/05', 'ticket_no' => 'AAE', 'remarks' => ''),
-//     array('name' => 'emily', 'date' => '2021/06/06', 'ticket_no' => 'AAF', 'remarks' => ''),
-//     array('name' => 'sandy', 'date' => '2021/06/07', 'ticket_no' => 'AAG', 'remarks' => ''),
-
-//     array('name' => 'bob', 'date' => '2021/06/01', 'ticket_no' => 'AAA', 'remarks' => ''),
-//     array('name' => 'alice', 'date' => '2021/06/02', 'ticket_no' => 'AAB', 'remarks' => ''),
-//     array('name' => 'tom', 'date' => '2021/06/03', 'ticket_no' => 'AAC', 'remarks' => ''),
-//     array('name' => 'henry', 'date' => '2021/06/04', 'ticket_no' => 'AAD', 'remarks' => ''),
-//     array('name' => 'kim', 'date' => '2021/06/05', 'ticket_no' => 'AAE', 'remarks' => ''),
-//     array('name' => 'emily', 'date' => '2021/06/06', 'ticket_no' => 'AAF', 'remarks' => ''),
-//     array('name' => 'sandy', 'date' => '2021/06/07', 'ticket_no' => 'AAG', 'remarks' => ''),
-
-//     array('name' => 'bob', 'date' => '2021/06/01', 'ticket_no' => 'AAA', 'remarks' => ''),
-//     array('name' => 'alice', 'date' => '2021/06/02', 'ticket_no' => 'AAB', 'remarks' => ''),
-//     array('name' => 'tom', 'date' => '2021/06/03', 'ticket_no' => 'AAC', 'remarks' => ''),
-//     array('name' => 'henry', 'date' => '2021/06/04', 'ticket_no' => 'AAD', 'remarks' => ''),
-//     array('name' => 'kim', 'date' => '2021/06/05', 'ticket_no' => 'AAE', 'remarks' => ''),
-//     array('name' => 'emily', 'date' => '2021/06/06', 'ticket_no' => 'AAF', 'remarks' => ''),
-//     array('name' => 'sandy', 'date' => '2021/06/07', 'ticket_no' => 'AAG', 'remarks' => ''),
-
-//     array('name' => 'bob', 'date' => '2021/06/01', 'ticket_no' => 'AAA', 'remarks' => ''),
-//     array('name' => 'alice', 'date' => '2021/06/02', 'ticket_no' => 'AAB', 'remarks' => ''),
-//     array('name' => 'tom', 'date' => '2021/06/03', 'ticket_no' => 'AAC', 'remarks' => ''),
-//     array('name' => 'henry', 'date' => '2021/06/04', 'ticket_no' => 'AAD', 'remarks' => ''),
-//     array('name' => 'kim', 'date' => '2021/06/05', 'ticket_no' => 'AAE', 'remarks' => ''),
-//     array('name' => 'emily', 'date' => '2021/06/06', 'ticket_no' => 'AAF', 'remarks' => ''),
-//     array('name' => 'sandy', 'date' => '2021/06/07', 'ticket_no' => 'AAG', 'remarks' => ''),
-
-//     array('name' => 'bob', 'date' => '2021/06/01', 'ticket_no' => 'AAA', 'remarks' => ''),
-//     array('name' => 'alice', 'date' => '2021/06/02', 'ticket_no' => 'AAB', 'remarks' => ''),
-//     array('name' => 'tom', 'date' => '2021/06/03', 'ticket_no' => 'AAC', 'remarks' => ''),
-//     array('name' => 'henry', 'date' => '2021/06/04', 'ticket_no' => 'AAD', 'remarks' => ''),
-//     array('name' => 'kim', 'date' => '2021/06/05', 'ticket_no' => 'AAE', 'remarks' => ''),
-//     array('name' => 'emily', 'date' => '2021/06/06', 'ticket_no' => 'AAF', 'remarks' => ''),
-//     array('name' => 'sandy', 'date' => '2021/06/07', 'ticket_no' => 'AAG', 'remarks' => ''),
-
-//     array('name' => 'bob', 'date' => '2021/06/01', 'ticket_no' => 'AAA', 'remarks' => ''),
-//     array('name' => 'alice', 'date' => '2021/06/02', 'ticket_no' => 'AAB', 'remarks' => ''),
-//     array('name' => 'tom', 'date' => '2021/06/03', 'ticket_no' => 'AAC', 'remarks' => ''),
-//     array('name' => 'henry', 'date' => '2021/06/04', 'ticket_no' => 'AAD', 'remarks' => ''),
-//     array('name' => 'kim', 'date' => '2021/06/05', 'ticket_no' => 'AAE', 'remarks' => ''),
-//     array('name' => 'emily', 'date' => '2021/06/06', 'ticket_no' => 'AAF', 'remarks' => ''),
-//     array('name' => 'sandy', 'date' => '2021/06/07', 'ticket_no' => 'AAG', 'remarks' => ''),
-
-//     array('name' => 'bob', 'date' => '2021/06/01', 'ticket_no' => 'AAA', 'remarks' => ''),
-//     array('name' => 'alice', 'date' => '2021/06/02', 'ticket_no' => 'AAB', 'remarks' => ''),
-//     array('name' => 'tom', 'date' => '2021/06/03', 'ticket_no' => 'AAC', 'remarks' => ''),
-//     array('name' => 'henry', 'date' => '2021/06/04', 'ticket_no' => 'AAD', 'remarks' => ''),
-//     array('name' => 'kim', 'date' => '2021/06/05', 'ticket_no' => 'AAE', 'remarks' => ''),
-//     array('name' => 'emily', 'date' => '2021/06/06', 'ticket_no' => 'AAF', 'remarks' => ''),
-//     array('name' => 'sandy', 'date' => '2021/06/07', 'ticket_no' => 'AAG', 'remarks' => ''),
-// );
-
-$data_num = count($test_data);
-
+$data_num = count($test_data) * count($test_data[0]);
 $max_page = ceil($data_num / MAX);
 
 if(!isset($_GET['page_id'])) {
@@ -90,10 +35,10 @@ if(!isset($_GET['page_id'])) {
     $now = $_GET['page_id'];
 }
 
-$start_no = ($now - 1) * MAX;
+$start_no = $now - 1;
+$disp_data = $test_data[$start_no];
 
-$disp_data = array_slice($test_data, $start_no, MAX, true);
-
+// データをテーブル形式で表示する
 echo "<table border='1'>";
 echo "<thead>";
 echo "<tr>";
@@ -106,11 +51,11 @@ echo "</thead>";
 
 echo "<tbody>";
 foreach ($disp_data as $val) {
-    echo "<form action='update_testdata.php' method='post'>";
+    echo "<form action='update_record.php' method='post'>";
     echo "<tr>";
     echo "<td><input type='text' name='name' value='" . $val['name'] . "' readonly></td>";
     echo "<td><input type='text' name='receipt_date' value='" . $val['receipt_date'] . "'></td>";
-    echo "<td><input type='text' name='ticket_no' value='" . $val['ticket'] . "'></td>";
+    echo "<td><input type='text' name='ticket' value='" . $val['ticket'] . "'></td>";
     echo "<td><input type='text' name='remarks' value='" . $val['remarks'] . "'></td>";
     echo "<input type='hidden' name='page_no' value='" . $val['page_no'] . "'>";
     echo "<td><input type='submit' value='更新'></td>";
@@ -159,7 +104,7 @@ if ($max_page >= 4) { // ページ数が4以上の場合
     }
 }
 
-echo "<form action='#' method='post'>";
+echo "<form action='add_record.php' method='post'>";
 echo "<p><input type='submit' value='ページ追加'></p>";
 echo "</form>";
 

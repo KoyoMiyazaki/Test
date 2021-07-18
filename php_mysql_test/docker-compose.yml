@@ -21,6 +21,7 @@ services:
             - MYSQL_ROOT_PASSWORD=pass
         volumes:
             - ./mysql/mysql_conf:/etc/mysql/conf.d
+            - ./mysql/mysql_data:/var/lib/mysql
         network_mode: "php_mysql_network"
 
 networks:
