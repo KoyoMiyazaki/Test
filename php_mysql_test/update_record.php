@@ -6,6 +6,12 @@
     $remarks = $_POST['remarks'];
     $page_no = $_POST['page_no'];
 
+    // var_dump($_POST);
+
+    if ($receipt_date == '') {
+        $receipt_date = date('Y-m-d');
+    }
+
     try {
         $dsn = "mysql:host=mysql;dbname=sample;";
         $db = new PDO($dsn, 'root', 'pass');
@@ -19,5 +25,5 @@
         exit;
     }
 
-    $url = 'http://localhost/test.php';
+    $url = "http://localhost/test.php?page=" . $page_no;
     header('Location: ' . $url, true, 301);
