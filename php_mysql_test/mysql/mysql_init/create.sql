@@ -5,6 +5,7 @@ CREATE TABLE data_table(
     id int AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     receipt_date DATE,
+    class VARCHAR(255),
     ticket VARCHAR(255),
     remarks VARCHAR(255),
     page_no int

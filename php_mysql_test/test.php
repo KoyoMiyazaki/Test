@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./confirm.js"></script>
+</head>
+<body>
 <?php
 define('MAX', '7');
 
@@ -6,19 +16,29 @@ function print_table_header()
 {
     echo "<th>名前</th>";
     echo "<th>日付</th>";
+    echo "<th>クラス</th>";
     echo "<th>チケット番号</th>";
     echo "<th>備考</th>";
 }
 
-function print_table_body($name, $receipt_date, $ticket, $remarks, $readonly)
+function print_table_body($name, $receipt_date, $class, $ticket, $remarks, $readonly)
 {
     echo "<td><input type='text' name='name' value='" . $name . "' readonly></td>";
     if ($readonly == true) {
         echo "<td><input type='text' name='receipt_date' value='" . $receipt_date . "' readonly></td>";
+        echo "<td><input type='text' name='class' value='" . $class . "' readonly></td>";
         echo "<td><input type='text' name='ticket' value='" . $ticket . "' readonly></td>";
         echo "<td><input type='text' name='remarks' value='" . $remarks . "' readonly></td>";
     } else {
         echo "<td><input type='text' name='receipt_date' value='" . $receipt_date . "'></td>";
+        echo "<td>";
+        echo "<select name='class'>";
+        echo "<option value=''></option>";
+        echo "<option value='A'>A</option>";
+        echo "<option value='B'>B</option>";
+        echo "<option value='C'>C</option>";
+        echo "</select>";
+        echo "</td>";
         echo "<td><input type='text' name='ticket' value='" . $ticket . "'></td>";
         echo "<td><input type='text' name='remarks' value='" . $remarks . "'></td>";
     }
@@ -74,9 +94,9 @@ if (count($_POST) != 0) {
     echo "<tbody>";
     echo "<form action='update_record.php' method='post'>";
     echo "<tr>";
-    print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['ticket'], $_POST['remarks'], false);
+    print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], false);
     echo "<input type='hidden' name='page_no' value='" . $_POST['page_no'] . "'>";
-    echo "<td><input type='submit' value='登録する'></td>";
+    echo "<td><button id='register-button' type='submit'>登録する</button></td>";
     echo "</tr>";
     echo "</form>";
     echo "</tbody>";
@@ -102,7 +122,7 @@ foreach ($disp_data as $val) {
     } else {
         echo "<tr>";
     }
-    print_table_body($val['name'], $val['receipt_date'], $val['ticket'], $val['remarks'], true);
+    print_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true);
     echo "<td><input type='submit' value='更新する'></td>";
     echo "<input type='hidden' name='page_no' value='" . $val['page_no'] . "'>";
     echo "</tr>";
@@ -114,38 +134,38 @@ echo "</table>";
 // ページネーション
 if ($max_page >= 4) { // ページ数が4以上の場合
     if ($now_page != 1 && $now_page != $max_page) {
-        echo "<a href='/test.php?page=1'>1</a>" . '  ';
+        echo "<a href='/test.php?page=1'>1</a>" . "  ";
         if ($now_page - 3 >= 1) {
-            echo "...  ";
+            echo "<span>...  </span>";
         }
         if ($now_page - 1 != 1) {
-            echo "<a href='/test.php?page=" . ($now_page-1) . "'>" . ($now_page-1) . "</a>" . '  ';
+            echo "<a href='/test.php?page=" . ($now_page-1) . "'>" . ($now_page-1) . "</a>" . "  ";
         }
-        echo $now_page . '  ';
+        echo "<span id='now-page'>" . $now_page . "  </span>";
         if ($now_page + 1 != $max_page) {
-            echo "<a href='/test.php?page=" . ($now_page+1) . "'>" . ($now_page+1) . "</a>" . '  ';
+            echo "<a href='/test.php?page=" . ($now_page+1) . "'>" . ($now_page+1) . "</a>" . "  ";
         }
         if ($now_page + 3 <= $max_page) {
-            echo "...  ";
+            echo "<span>...  </span>";
         }
-        echo "<a href='/test.php?page=" . $max_page . "'>" . $max_page . "</a>" . '  ';
+        echo "<a href='/test.php?page=" . $max_page . "'>" . $max_page . "</a>" . "  ";
     } else if ($now_page == 1) {
-        echo '1  ';
-        echo "<a href='/test.php?page=2'>2</a>" . '  ';
-        echo "...  ";
-        echo "<a href='/test.php?page=" . $max_page . "'>" . $max_page . "</a>" . '  ';
+        echo "<span id='now-page'>1  </span>";
+        echo "<a href='/test.php?page=2'>2</a>" . "  ";
+        echo "<span>...  </span>";
+        echo "<a href='/test.php?page=" . $max_page . "'>" . $max_page . "</a>" . "  ";
     } else if ($now_page == $max_page) {
-        echo "<a href='/test.php?page=1'>1</a>" . '  ';
-        echo "...  ";
-        echo "<a href='/test.php?page=" . ($max_page-1) . "'>" . ($max_page-1) . "</a>" . '  ';
-        echo $max_page . '  ';
+        echo "<a href='/test.php?page=1'>1</a>" . "  ";
+        echo "<span>...  </span>";
+        echo "<a href='/test.php?page=" . ($max_page-1) . "'>" . ($max_page-1) . "</a>" . "  ";
+        echo "<span id='now-page'>" . $max_page . "  </span>";
     }
 } else { // ページ数が3以下の場合
     for($i = 1; $i <= $max_page; $i++) {
         if($i == $now_page) {
-            echo $now_page . '  ';
+            echo "<span id='now-page'>" . $now_page . "  </span>";
         } else {
-            echo "<a href='/test.php?page=" . $i . "'>" . $i . "</a>" . '  ';
+            echo "<a href='/test.php?page=" . $i . "'>" . $i . "</a>" . "  ";
         }
     }
 }
@@ -155,7 +175,8 @@ echo "<p><input type='submit' value='ページ追加'></p>";
 echo "</form>";
 
 echo "<form action='remove_record.php' method='post'>";
-echo "<p><input type='submit' value='ページ削除'></p>";
+// echo "<p><input type='submit' value='ページ削除'></p>";
+echo "<p><button id='remove-button' type='submit'>ページ削除</button></p>";
 echo "<input type='hidden' name='page_no' value='" . $now_page . "'>";
 echo "</form>";
 
@@ -166,3 +187,9 @@ echo "</form>";
 echo "<form action='show_testdata.php' method='post'>";
 echo "<p><input type='submit' value='テストデータ参照'></p>";
 echo "</form>";
+
+?>
+<!-- <script src="./confirm.js"></script> -->
+
+</body>
+</html>

@@ -2,6 +2,7 @@
     // POSTで渡されたパラメータを変数に保存
     $name = $_POST['name'];
     $receipt_date = $_POST['receipt_date'];
+    $class = $_POST['class'];
     $ticket = $_POST['ticket'];
     $remarks = $_POST['remarks'];
     $page_no = $_POST['page_no'];
@@ -16,9 +17,9 @@
         $dsn = "mysql:host=mysql;dbname=sample;";
         $db = new PDO($dsn, 'root', 'pass');
 
-        $sql = "UPDATE data_table SET receipt_date=:receipt_date, ticket=:ticket, remarks=:remarks where name=:name and page_no=:page_no;";
+        $sql = "UPDATE data_table SET receipt_date=:receipt_date, class=:class, ticket=:ticket, remarks=:remarks where name=:name and page_no=:page_no;";
         $stmt = $db->prepare($sql);
-        $params = array(':name' => $name, 'receipt_date' => $receipt_date, ':ticket' => $ticket, ':remarks' => $remarks, ':page_no' => $page_no);
+        $params = array(':name' => $name, ':receipt_date' => $receipt_date, ':class' => $class, ':ticket' => $ticket, ':remarks' => $remarks, ':page_no' => $page_no);
         $stmt->execute($params);
     } catch (PDOException $e) {
         echo $e->getMessage();
