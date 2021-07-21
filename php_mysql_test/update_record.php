@@ -26,5 +26,5 @@
         exit;
     }
 
-    $url = "http://localhost/test.php?page=" . $page_no;
+    $url = "http://localhost/index.php?page=" . $page_no;
     header('Location: ' . $url, true, 301);

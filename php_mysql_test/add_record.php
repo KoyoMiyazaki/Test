@@ -7,7 +7,6 @@
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
-
         $users = ['bob', 'alice', 'tom', 'henry', 'kim', 'emily', 'sandy'];
         $sql = "INSERT INTO data_table (name, page_no) VALUES (:name, 1);";
         $stmt = $db->prepare($sql);
@@ -20,5 +19,5 @@
         exit;
     }
 
-    $url = 'http://localhost/test.php';
+    $url = 'http://localhost/index.php';
     header('Location: ' . $url, true, 301);

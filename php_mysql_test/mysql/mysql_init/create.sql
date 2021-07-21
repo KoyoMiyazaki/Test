@@ -11,4 +11,9 @@ CREATE TABLE data_table(
     page_no int
 );
 
+CREATE TABLE user(
+    name VARCHAR(255) PRIMARY KEY,
+    primary_order int unique
+);
+
 ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'pass';

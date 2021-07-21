@@ -34,7 +34,6 @@
         echo $e->getMessage();
         exit;
     }
-    var_dump(count($data) * count($data[0]));
 ?>
 
 </body>

@@ -6,7 +6,6 @@
 
         // page_noのデータを全削除
         $sql = "DELETE FROM data_table WHERE page_no=:page_no;";
-        // $sql = "UPDATE data_table SET page_no=page_no+1;";
         $stmt = $db->prepare($sql);
         $params = array(':page_no' => $page_no);
         $stmt->execute($params);
@@ -30,5 +29,5 @@
         exit;
     }
 
-    $url = 'http://localhost/test.php';
+    $url = 'http://localhost/index.php';
     header('Location: ' . $url, true, 301);
