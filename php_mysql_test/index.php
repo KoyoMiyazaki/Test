@@ -16,36 +16,43 @@
 
 <?php
     // 関数定義
+
+    // テーブルのヘッダを返す
     function print_table_header()
     {
-        echo "<th>名前</th>";
-        echo "<th>日付</th>";
-        echo "<th>クラス</th>";
-        echo "<th>チケット番号</th>";
-        echo "<th>備考</th>";
+        $table_header = "<th>名前</th>" .
+            "<th>日付</th>".
+            "<th>クラス</th>" .
+            "<th>チケット番号</th>" .
+            "<th>備考</th>";
+        return $table_header;
     }
     
+    // テーブルのボディ部を返す
     function print_table_body($name, $receipt_date, $class, $ticket, $remarks, $readonly)
     {
-        echo "<td><input type='text' name='name' value='" . $name . "' readonly></td>";
+        $table_body = "<td><input type='text' name='name' value='" . $name . "' readonly></td>";
         if ($readonly == true) {
-            echo "<td><input type='text' name='receipt_date' value='" . $receipt_date . "' readonly></td>";
-            echo "<td><input type='text' name='class' value='" . $class . "' readonly></td>";
-            echo "<td><input type='text' name='ticket' value='" . $ticket . "' readonly></td>";
-            echo "<td><input type='text' name='remarks' value='" . $remarks . "' readonly></td>";
+            $table_body = $table_body .
+                "<td><input type='text' name='receipt_date' value='" . $receipt_date . "' readonly></td>" .
+                "<td><input type='text' name='class' value='" . $class . "' readonly></td>" .
+                "<td><input type='text' name='ticket' value='" . $ticket . "' readonly></td>" .
+                "<td><input type='text' name='remarks' value='" . $remarks . "' readonly></td>";
         } else {
-            echo "<td><input type='text' name='receipt_date' value='" . $receipt_date . "'></td>";
-            echo "<td>";
-            echo "<select name='class'>";
-            echo "<option value=''></option>";
-            echo "<option value='A'>A</option>";
-            echo "<option value='B'>B</option>";
-            echo "<option value='C'>C</option>";
-            echo "</select>";
-            echo "</td>";
-            echo "<td><input type='text' name='ticket' value='" . $ticket . "'></td>";
-            echo "<td><input type='text' name='remarks' value='" . $remarks . "'></td>";
+            $table_body = $table_body .
+                "<td><input type='text' name='receipt_date' value='" . $receipt_date . "'></td>" .
+                "<td>" .
+                "<select name='class'>" .
+                "<option value=''></option>" .
+                "<option value='A'>A</option>" .
+                "<option value='B'>B</option>" .
+                "<option value='C'>C</option>" .
+                "</select>" .
+                "</td>" .
+                "<td><input type='text' name='ticket' value='" . $ticket . "'></td>" .
+                "<td><input type='text' name='remarks' value='" . $remarks . "'></td>";
         }
+        return $table_body;
     }
 ?>
 
@@ -95,13 +102,13 @@
     <table border='1'>
     <thead>
         <tr>
-            <?php print_table_header(); ?>
+            <?= print_table_header(); ?>
         </tr>
     </thead>
     <tbody>
         <form action='update_record.php' method='post'>
         <tr>
-            <?php print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], false); ?>
+            <?= print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], false); ?>
             <input type='hidden' name='page_no' value=<?= $_POST['page_no'] ?>>
             <td><button id='register-button' type='submit'>登録する</button></td>
         </tr>
@@ -115,7 +122,7 @@
     <table border='1'>
     <thead>
         <tr>
-            <?php print_table_header(); ?>
+            <?= print_table_header(); ?>
         </tr>
     </thead>
     <tbody>
@@ -126,7 +133,7 @@
         <?php else: ?>
             <tr>
         <?php endif; ?>
-                <?php print_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true); ?>
+                <?= print_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true); ?>
                 <td><input type='submit' value='更新する'></td>
                 <input type='hidden' name='page_no' value=<?= $val['page_no'] ?>>
             </tr>
@@ -162,7 +169,7 @@
             if($i == $now_page) {
                 echo "<span id='now-page'>" . $now_page . "  </span>";
             } else {
-                echo "<a href='/index.php?page=" . $i . "'>" . $i . "</a>" . "  ";
+                echo "<span><a href='/index.php?page=" . $i . "'>" . $i . "</a>  </span>";
             }
         }
         ?>
