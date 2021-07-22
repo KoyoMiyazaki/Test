@@ -1,8 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./confirm.js"></script>
+</head>
+<body>
+
 <?php
-namespace Userland {
-    use PDO;
+    // 定数定義
     define('MAX', '7');
-    
+?>
+
+<?php
     // 関数定義
     function print_table_header()
     {
@@ -35,7 +47,10 @@ namespace Userland {
             echo "<td><input type='text' name='remarks' value='" . $remarks . "'></td>";
         }
     }
-    
+?>
+
+<!-- DB処理 -->
+<?php
     try {
         $dsn = "mysql:host=mysql;dbname=sample;";
         $db = new PDO($dsn, 'root', 'pass');
@@ -60,97 +75,89 @@ namespace Userland {
         echo $e->getMessage();
         exit;
     }
-    
+
     $data_num = count($test_data) * count($test_data[0]);
     $max_page = ceil($data_num / MAX);
     
     if(!isset($_GET['page'])) {
         $now_page = 1;
     } else {
-        $now_page = $_GET['page'];
+        $now_page = intval($_GET['page']);
     }
     
     $start_no = $now_page - 1;
     $disp_data = $test_data[$start_no];
-    
-    // --- POST テスト ここから ---
-    if (count($_POST) != 0) {
-        echo "<h2>登録欄</h2>";
-        echo "<table border='1'>";
-        echo "<thead>";
-        echo "<tr>";
-        print_table_header();
-        echo "</tr>";
-        echo "</thead>";
-    
-        echo "<tbody>";
-        echo "<form action='update_record.php' method='post'>";
-        echo "<tr>";
-        print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], false);
-        echo "<input type='hidden' name='page_no' value='" . $_POST['page_no'] . "'>";
-        echo "<td><button id='register-button' type='submit'>登録する</button></td>";
-        echo "</tr>";
-        echo "</form>";
-        echo "</tbody>";
-        echo "</table>";
-    }
-    
-    // データをテーブル形式で表示する
-    echo "<h2>登録情報一覧</h2>";
-    echo "<table border='1'>";
-    echo "<thead>";
-    echo "<tr>";
-    print_table_header();
-    echo "</tr>";
-    echo "</thead>";
-    
-    echo "<tbody>";
-    foreach ($disp_data as $val) {
-        echo "<form action='index.php?page=" . $now_page . "' method='post'>";
-        if (count($_POST) != 0 && $_POST['name'] == $val['name']) {
-            echo "<tr bgcolor='yellow'>";
-        } else {
-            echo "<tr>";
-        }
-        print_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true);
-        echo "<td><input type='submit' value='更新する'></td>";
-        echo "<input type='hidden' name='page_no' value='" . $val['page_no'] . "'>";
-        echo "</tr>";
-        echo "</form>";
-    }
-    echo "</tbody>";
-    echo "</table>";
-    
-    // ページネーション
-    if ($max_page >= 4) { // ページ数が4以上の場合
-        if ($now_page != 1 && $now_page != $max_page) {
-            echo "<a href='/index.php?page=1'>1</a>" . "  ";
-            if ($now_page - 3 >= 1) {
-                echo "<span>...  </span>";
-            }
-            if ($now_page - 1 != 1) {
-                echo "<a href='/index.php?page=" . ($now_page-1) . "'>" . ($now_page-1) . "</a>" . "  ";
-            }
-            echo "<span id='now-page'>" . $now_page . "  </span>";
-            if ($now_page + 1 != $max_page) {
-                echo "<a href='/index.php?page=" . ($now_page+1) . "'>" . ($now_page+1) . "</a>" . "  ";
-            }
-            if ($now_page + 3 <= $max_page) {
-                echo "<span>...  </span>";
-            }
-            echo "<a href='/index.php?page=" . $max_page . "'>" . $max_page . "</a>" . "  ";
-        } else if ($now_page == 1) {
-            echo "<span id='now-page'>1  </span>";
-            echo "<a href='/index.php?page=2'>2</a>" . "  ";
-            echo "<span>...  </span>";
-            echo "<a href='/index.php?page=" . $max_page . "'>" . $max_page . "</a>" . "  ";
-        } else if ($now_page == $max_page) {
-            echo "<a href='/index.php?page=1'>1</a>" . "  ";
-            echo "<span>...  </span>";
-            echo "<a href='/index.php?page=" . ($max_page-1) . "'>" . ($max_page-1) . "</a>" . "  ";
-            echo "<span id='now-page'>" . $max_page . "  </span>";
-        }
-    } else { // ページ数が3以下の場合
+?>
+
+<!-- 登録欄を表示(POSTされている場合) -->
+<?php if (count($_POST) != 0): ?>
+    <h2>登録欄</h2>
+    <table border='1'>
+    <thead>
+        <tr>
+            <?php print_table_header(); ?>
+        </tr>
+    </thead>
+    <tbody>
+        <form action='update_record.php' method='post'>
+        <tr>
+            <?php print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], false); ?>
+            <input type='hidden' name='page_no' value=<?= $_POST['page_no'] ?>>
+            <td><button id='register-button' type='submit'>登録する</button></td>
+        </tr>
+        </form>
+    </tbody>
+    </table>
+<?php endif; ?>
+
+<!-- データをテーブル形式で表示する -->
+    <h2>登録情報一覧</h2>
+    <table border='1'>
+    <thead>
+        <tr>
+            <?php print_table_header(); ?>
+        </tr>
+    </thead>
+    <tbody>
+<?php foreach ($disp_data as $val): ?>
+        <form action='index.php?page=<?= $now_page ?>' method='post'>
+        <?php if (count($_POST) != 0 && $_POST['name'] == $val['name']): ?>
+            <tr bgcolor='yellow'>
+        <?php else: ?>
+            <tr>
+        <?php endif; ?>
+                <?php print_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true); ?>
+                <td><input type='submit' value='更新する'></td>
+                <input type='hidden' name='page_no' value=<?= $val['page_no'] ?>>
+            </tr>
+        </form>
+<?php endforeach; ?>
+    </tbody>
+    </table>
+
+<!-- ページネーション -->
+    <?php if ($max_page >= 4): ?> <!-- ページ数が4以上の場合 -->
+        <?php if ($now_page != 1 && $now_page != $max_page): ?>
+            <span><a href='/index.php?page=1'>1</a>  </span>
+            <?php if ($now_page - 3 >= 1) echo "<span>...  </span>"; ?>
+            <?php if ($now_page - 1 != 1) echo "<a href='/index.php?page=" . ($now_page-1) . "'>" . ($now_page-1) . "</a>" . "  "; ?>
+            <span id='now-page'><?= $now_page ?>  </span>
+            <?php if ($now_page + 1 != $max_page) echo "<a href='/index.php?page=" . ($now_page+1) . "'>" . ($now_page+1) . "</a>" . "  "; ?>
+            <?php if ($now_page + 3 <= $max_page) echo "<span>...  </span>"; ?>
+            <span><a href='/index.php?page=<?= $max_page ?>'><?= $max_page ?></a>  </span>
+        <?php elseif ($now_page == 1): ?>
+            <span id='now-page'>1  </span>
+            <span><a href='/index.php?page=2'>2</a>  </span>
+            <span>...  </span>
+            <span><a href='/index.php?page=<?= $max_page ?>'><?= $max_page ?></a>  </span>
+        <?php elseif ($now_page == $max_page): ?>
+            <span><a href='/index.php?page=1'>1</a>  </span>
+            <span>...  </span>
+            <span><a href='/index.php?page=<?= ($max_page-1) ?>'><?= ($max_page-1) ?></a>  </span>
+            <span id='now-page'><?= $max_page ?></span>
+        <?php endif; ?>
+    <?php else: ?> <!-- ページ数が3以下の場合 -->
+        <?php
         for($i = 1; $i <= $max_page; $i++) {
             if($i == $now_page) {
                 echo "<span id='now-page'>" . $now_page . "  </span>";
@@ -158,8 +165,9 @@ namespace Userland {
                 echo "<a href='/index.php?page=" . $i . "'>" . $i . "</a>" . "  ";
             }
         }
-    }
-    
+        ?>
+    <?php endif; ?>
+<?php
     echo "<form action='add_record.php' method='post'>";
     echo "<p><input type='submit' value='ページ追加'></p>";
     echo "</form>";
@@ -180,6 +188,7 @@ namespace Userland {
     echo "<form action='show_userdata.php' method='post'>";
     echo "<p><input type='submit' value='ユーザデータ参照'></p>";
     echo "</form>";
-}
-
 ?>
+    
+</body>
+</html>
