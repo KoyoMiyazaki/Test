@@ -11,7 +11,7 @@
 
 <?php
     // 定数定義
-    define('MAX', '7');
+    define('MAX', '7'); // Todo: userテーブルから取得する
 ?>
 
 <?php
@@ -59,6 +59,7 @@
 <!-- DB処理 -->
 <?php
     try {
+        // Todo: 接続先DBの情報、ユーザ、パスワードをハードコーディングしない
         $dsn = "mysql:host=mysql;dbname=sample;";
         $db = new PDO($dsn, 'root', 'pass');
     
@@ -70,12 +71,12 @@
     
         // data_tableよりデータを取得
         $sql = "SELECT * FROM data_table WHERE page_no = :page_no;";
-        $test_data = array();
+        $user_data = array();
         $stmt = $db->prepare($sql);
         for($i = 1, $max = intval($result[0]["max_page_no"]); $i <= $max; $i++) {
             $params = array(':page_no' => $i);
             $stmt->execute($params);
-            array_push($test_data, $stmt->fetchAll(PDO::FETCH_ASSOC));
+            array_push($user_data, $stmt->fetchAll(PDO::FETCH_ASSOC));
         }
     
     } catch (PDOException $e) {
@@ -83,17 +84,17 @@
         exit;
     }
 
-    $data_num = count($test_data) * count($test_data[0]);
-    $max_page = ceil($data_num / MAX);
+    $num_user_data = count($user_data) * count($user_data[0]);
+    $max_page = ceil($num_user_data / MAX);
     
-    if(!isset($_GET['page'])) {
+    if (!isset($_GET['page'])) {
         $now_page = 1;
     } else {
         $now_page = intval($_GET['page']);
     }
     
     $start_no = $now_page - 1;
-    $disp_data = $test_data[$start_no];
+    $disp_data = $user_data[$start_no];
 ?>
 
 <!-- 登録欄を表示(POSTされている場合) -->
@@ -165,8 +166,8 @@
         <?php endif; ?>
     <?php else: ?> <!-- ページ数が3以下の場合 -->
         <?php
-        for($i = 1; $i <= $max_page; $i++) {
-            if($i == $now_page) {
+        for ($i = 1; $i <= $max_page; $i++) {
+            if ($i == $now_page) {
                 echo "<span id='now-page'>" . $now_page . "  </span>";
             } else {
                 echo "<span><a href='/index.php?page=" . $i . "'>" . $i . "</a>  </span>";
