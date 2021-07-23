@@ -69,7 +69,6 @@
     }
 ?>
 
-    <?php var_dump($_POST); ?>
     <h1>ユーザ管理</h1>
 
 <?php if (count($_POST) != 0 && $_POST['type'] == 'register'): ?>
@@ -81,7 +80,7 @@
         </tr>
     </thead>
     <tbody>
-        <form action='add_record.php' method='post'>
+        <form action='add_user.php' method='post'>
             <tr>
                 <td><input type='text' name='name' value=''></td>
                 <td><input type='number' name='primary_order' value=''></td>
@@ -100,11 +99,12 @@
         </tr>
     </thead>
     <tbody>
-        <form action='add_record.php' method='post'>
+        <form action='update_user.php' method='post'>
             <tr>
-                <td><input type='text' name='name' value=<?= $_POST['name'] ?>></td>
-                <td><input type='number' name='primary_order' value=<?= $_POST['primary_order'] ?>></td>
-                <td><button id='register-button' type='submit'>更新する</button></td>
+                <td><input type='text' name='updated_name' value=<?= $_POST['name'] ?>></td>
+                <td><input type='number' name='updated_primary_order' value=<?= $_POST['primary_order'] ?>></td>
+                <input type='hidden' name='name' value=<?= $_POST['name'] ?>>
+                <td><button id='update-button' type='submit'>更新する</button></td>
             </tr>
         </form>
     </tbody>
@@ -130,11 +130,11 @@
                     <input type='hidden' name='name' value=<?= $user['name'] ?>>
                     <input type='hidden' name='primary_order' value=<?= $user['primary_order'] ?>>
                     <input type='hidden' name='type' value='update'>
-                    <button id='update-button' type='submit'>更新</button>
+                    <button type='submit'>更新</button>
                 </form>
             </td>
             <td>
-                <form action='#' method='post'>
+                <form action='remove_user.php' method='post'>
                     <input type='hidden' name='name' value=<?= $user['name'] ?>>
                     <button id='remove-button' type='submit'>削除</button>
                 </form>
@@ -147,7 +147,7 @@
 
     <form action='index.php' method='post'>
         <input type='hidden' name='type' value='register'>
-        <button id='register-button' type='submit'>ユーザ登録</button>
+        <button type='submit'>ユーザ登録</button>
     </form>
 </body>
 </html>
