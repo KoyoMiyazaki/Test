@@ -10,7 +10,7 @@
     // var_dump($_POST);
 
     if ($receipt_date == '') {
-        $receipt_date = date('Y-m-d');
+        $receipt_date = null;
     }
 
     try {

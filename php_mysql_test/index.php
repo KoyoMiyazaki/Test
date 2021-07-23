@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>アプリ | メイン画面</title>
     <script src="./confirm.js"></script>
 </head>
 <body>
@@ -34,13 +34,15 @@
         $table_body = "<td><input type='text' name='name' value='" . $name . "' readonly></td>";
         if ($readonly == true) {
             $table_body = $table_body .
-                "<td><input type='text' name='receipt_date' value='" . $receipt_date . "' readonly></td>" .
+                // "<td><input type='text' name='receipt_date' value='" . $receipt_date . "' readonly></td>" .
+                "<td><input type='date' name='receipt_date' value='" . $receipt_date . "' readonly></td>" .
                 "<td><input type='text' name='class' value='" . $class . "' readonly></td>" .
                 "<td><input type='text' name='ticket' value='" . $ticket . "' readonly></td>" .
                 "<td><input type='text' name='remarks' value='" . $remarks . "' readonly></td>";
         } else {
             $table_body = $table_body .
-                "<td><input type='text' name='receipt_date' value='" . $receipt_date . "'></td>" .
+                // "<td><input type='text' name='receipt_date' value='" . $receipt_date . "'></td>" .
+                "<td><input type='date' name='receipt_date' value='" . $receipt_date . "'></td>" .
                 "<td>" .
                 "<select name='class'>" .
                 "<option value=''></option>" .
@@ -97,6 +99,8 @@
     $disp_data = $user_data[$start_no];
 ?>
 
+<h1>アプリ</h1>
+
 <!-- 登録欄を表示(POSTされている場合) -->
 <?php if (count($_POST) != 0): ?>
     <h2>登録欄</h2>
@@ -109,7 +113,11 @@
     <tbody>
         <form action='update_record.php' method='post'>
         <tr>
-            <?= print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], false); ?>
+            <?php if ($_POST["receipt_date"] == ""): ?>
+                <?= print_table_body($_POST['name'], date("Y-m-d"), $_POST['class'], $_POST['ticket'], $_POST['remarks'], false); ?>
+            <?php else: ?>
+                <?= print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], false); ?>
+            <?php endif; ?>
             <input type='hidden' name='page_no' value=<?= $_POST['page_no'] ?>>
             <td><button id='register-button' type='submit'>登録する</button></td>
         </tr>
