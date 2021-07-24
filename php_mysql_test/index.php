@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>アプリ | メイン画面</title>
+    <link rel="stylesheet" href="style.css">
     <script src="./confirm.js"></script>
 </head>
 <body>
@@ -99,8 +100,17 @@
     $disp_data = $user_data[$start_no];
 ?>
 
-<h1>アプリ</h1>
+<div class="navbar">
+    <div class="navbar-content">
+        <h1>アプリ</h1>
+        <ul>
+            <li><a href="">統計情報</a></li>
+            <li><a href="">ユーザ管理</a></li>
+        </ul>
+    </div>
+</div>
 
+<div class="container">
 <!-- 登録欄を表示(POSTされている場合) -->
 <?php if (count($_POST) != 0): ?>
     <h2>登録欄</h2>
@@ -119,7 +129,7 @@
                 <?= print_table_body($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], false); ?>
             <?php endif; ?>
             <input type='hidden' name='page_no' value=<?= $_POST['page_no'] ?>>
-            <td><button id='register-button' type='submit'>登録する</button></td>
+            <td class='non-border-td'><button id='register-button' type='submit'>登録する</button></td>
         </tr>
         </form>
     </tbody>
@@ -143,7 +153,7 @@
             <tr>
         <?php endif; ?>
                 <?= print_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true); ?>
-                <td><input type='submit' value='更新する'></td>
+                <td class="non-border-td"><button class='update-button' type='submit'>更新する</button></td>
                 <input type='hidden' name='page_no' value=<?= $val['page_no'] ?>>
             </tr>
         </form>
@@ -152,13 +162,14 @@
     </table>
 
 <!-- ページネーション -->
+    <div class="pagination">
     <?php if ($max_page >= 4): ?> <!-- ページ数が4以上の場合 -->
         <?php if ($now_page != 1 && $now_page != $max_page): ?>
             <span><a href='/index.php?page=1'>1</a>  </span>
             <?php if ($now_page - 3 >= 1) echo "<span>...  </span>"; ?>
-            <?php if ($now_page - 1 != 1) echo "<a href='/index.php?page=" . ($now_page-1) . "'>" . ($now_page-1) . "</a>" . "  "; ?>
+            <?php if ($now_page - 1 != 1) echo "<span><a href='/index.php?page=" . ($now_page-1) . "'>" . ($now_page-1) . "</a>  </span>"; ?>
             <span id='now-page'><?= $now_page ?>  </span>
-            <?php if ($now_page + 1 != $max_page) echo "<a href='/index.php?page=" . ($now_page+1) . "'>" . ($now_page+1) . "</a>" . "  "; ?>
+            <?php if ($now_page + 1 != $max_page) echo "<span><a href='/index.php?page=" . ($now_page+1) . "'>" . ($now_page+1) . "</a>  </span>"; ?>
             <?php if ($now_page + 3 <= $max_page) echo "<span>...  </span>"; ?>
             <span><a href='/index.php?page=<?= $max_page ?>'><?= $max_page ?></a>  </span>
         <?php elseif ($now_page == 1): ?>
@@ -183,28 +194,44 @@
         }
         ?>
     <?php endif; ?>
+    <span class="pseudo-span"></span>
+    </div>
+
+    <div class="page-buttons">
+        <form action='add_record.php' method='post'>
+            <p><button id='add-button' type='submit'>ページ追加</button></p>
+        </form>
+        
+        <form action='remove_record.php' method='post'>
+            <p><button id='remove-button' type='submit'>ページ削除</button></p>
+            <input type='hidden' name='page_no' value=<?= $now_page ?>>
+        </form>
+    </div>
+    
+    <!-- 統計情報確認 -->
+    <h2>統計情報</h2>
+    <p>ユーザ管理はこちらから</p>
+
+    <!-- ユーザ管理 -->
+    <h2>ユーザ管理</h2>
+    <p>ユーザ管理はこちらから</p>
+
 <?php
-    echo "<form action='add_record.php' method='post'>";
-    echo "<p><input type='submit' value='ページ追加'></p>";
-    echo "</form>";
+    // echo "<form action='add_testdata.php' method='post'>";
+    // echo "<p><input type='submit' value='テストデータ追加'></p>";
+    // echo "</form>";
     
-    echo "<form action='remove_record.php' method='post'>";
-    echo "<p><button id='remove-button' type='submit'>ページ削除</button></p>";
-    echo "<input type='hidden' name='page_no' value='" . $now_page . "'>";
-    echo "</form>";
+    // echo "<form action='show_testdata.php' method='post'>";
+    // echo "<p><input type='submit' value='テストデータ参照'></p>";
+    // echo "</form>";
     
-    echo "<form action='add_testdata.php' method='post'>";
-    echo "<p><input type='submit' value='テストデータ追加'></p>";
-    echo "</form>";
-    
-    echo "<form action='show_testdata.php' method='post'>";
-    echo "<p><input type='submit' value='テストデータ参照'></p>";
-    echo "</form>";
-    
-    echo "<form action='show_userdata.php' method='post'>";
-    echo "<p><input type='submit' value='ユーザデータ参照'></p>";
-    echo "</form>";
+    // echo "<form action='show_userdata.php' method='post'>";
+    // echo "<p><input type='submit' value='ユーザデータ参照'></p>";
+    // echo "</form>";
 ?>
-    
+</div>
+
+<div class="footer">
+</div>
 </body>
 </html>

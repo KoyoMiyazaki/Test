@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+body {
+    background-color: #b2b6e6;
+    color: #4b56d2;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px 40px 20px 40px;
+    max-width: 1080px;
+    background-color: white;
+}
+
+.footer {
+    margin: 0 auto;
+    max-width: 1160px;
+    background-color: #464242;
+    height: 48px;
+}
+
+.navbar {
+    margin: 40px auto 0 auto;
+    max-width: 1160px;
+    background-color: #464242;
+    
+}
+
+.navbar-content {
+    display: flex;
+    padding: 0 0 0 40px;
+    /* justify-content: space-between; */
+    color: white;
+}
+
+.navbar-content ul {
+    display: flex;
+    margin: 0;
+    line-height: 48px;
+    
+}
+
+.navbar-content li {
+    padding: 0 5px;
+    list-style: none;
+    border: 1px solid rgb(128, 128, 128);
+    color: white;
+}
+
+.navbar-content a {
+    display: block;
+    text-decoration: none;
+}
+
+.navbar-content a:visited {
+    color: white;
+}
+
+.navbar-content a:hover {
+    opacity: 0.8;
+}
+
+h1 {
+    margin: 0;
+}
+
+h2 {
+    margin-bottom: 8px;
+}
+
+table {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+span {
+    color: rgb(64, 64, 64);
+    padding: 5px 10px 5px 10px;
+    border: 1px solid rgb(128, 128, 128);
+    border-right: none;
+}
+
+.pseudo-span {
+    border-top: none;
+    border-bottom: none;
+}
+
+button {
+    color: white;
+    font-size: 0.8rem;
+    padding: 6px 10px 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#register-button, #add-button {
+    background-color: #0d6efd;
+}
+
+.update-button {
+    color: #0d6efd;
+    background-color: white;
+    border: 1px solid #0d6efd;
+}
+
+#remove-button {
+    background-color: #dc3545;
+    margin-left: 10px;  
+}
+
+#register-button:hover,
+#add-button:hover,
+#remove-button:hover {
+    opacity: 0.8;
+}
+
+.update-button:hover {
+    color: white;
+    background-color: #0d6efd;
+}
+
+.non-border-td {
+    border: none;
+}
+
+.page-buttons {
+    display: flex;
+    margin-top: 10px;
+}
+
+#add-button,
+#remove-button {
+    padding: 12px;
+}
