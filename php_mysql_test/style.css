@@ -1,8 +1,26 @@
 @charset "UTF-8";
 
+/* 共通css */
 body {
     background-color: #b2b6e6;
     color: #4b56d2;
+}
+
+h1 {
+    margin: 0;
+}
+
+h2 {
+    margin-bottom: 8px;
+}
+
+table {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+select {
+    width: 100px;
 }
 
 .container {
@@ -26,10 +44,10 @@ body {
     
 }
 
+/* ナビゲーションバーのcss */
 .navbar-content {
     display: flex;
     padding: 0 0 0 40px;
-    /* justify-content: space-between; */
     color: white;
 }
 
@@ -60,19 +78,7 @@ body {
     opacity: 0.8;
 }
 
-h1 {
-    margin: 0;
-}
-
-h2 {
-    margin-bottom: 8px;
-}
-
-table {
-    padding: 5px;
-    border-radius: 5px;
-}
-
+/* ページネーションのcss */
 .pagination {
     margin-top: 20px;
 }
@@ -89,6 +95,7 @@ span {
     border-bottom: none;
 }
 
+/* ボタンのcss */
 button {
     color: white;
     font-size: 0.8rem;
@@ -136,4 +143,9 @@ button {
 #add-button,
 #remove-button {
     padding: 12px;
+}
+
+/* 統計情報 */
+.stats td {
+    width: 100px;
 }
