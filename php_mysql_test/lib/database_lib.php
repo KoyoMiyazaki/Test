@@ -79,3 +79,9 @@ function get_num_classes_per_user($user_name)
     $result = exec_reference_sql($sql, $params);
     return intval($result[0]["total"]);
 }
+
+// データエクスポート
+function export_data_table()
+{
+    
+}

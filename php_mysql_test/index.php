@@ -91,6 +91,18 @@
     <h2>ユーザ管理</h2>
     <p>ユーザ管理はこちらから</p>
 
+    <!-- ユーザ管理 -->
+    <h2>データエクスポート</h2>
+    <div class="data-export">
+        <p>登録一覧情報のエクスポートを行う</p>
+        <form action='add_record.php' method='post'>
+            <p><button type='submit'>エクスポート</button></p>
+        </form>
+
+        <p>ユーザ情報のエクスポートを行う</p>
+
+    </div>
+
 <?php
     // echo "<form action='add_testdata.php' method='post'>";
     // echo "<p><input type='submit' value='テストデータ追加'></p>";
