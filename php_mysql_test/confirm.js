@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 削除ボタンのイベント追加
     const nowPage = document.getElementById('now-page').textContent;
-    const removeButton = document.getElementById('remove-button');
+    const removeButton = document.getElementById('remove-page-button');
     // console.log(nowPage);
     removeButton.onclick = () => {
         if (confirm(`${nowPage}ページを削除しますか？`)) {

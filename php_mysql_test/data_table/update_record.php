@@ -1,4 +1,10 @@
 <?php
+    namespace work;
+    require_once('../lib/common_lib.php');
+
+    use common_lib;
+    use PDO;
+
     // POSTで渡されたパラメータを変数に保存
     $name = $_POST['name'];
     $receipt_date = $_POST['receipt_date'];
@@ -26,5 +32,10 @@
         exit;
     }
 
-    $url = "http://localhost/index.php?page=" . $page_no;
+    common_lib\flash('error', '更新完了！');
+    // var_dump($_SESSION);
+    // echo "<br>";
+    // var_dump($flash);
+    // $url = "http://localhost/index.php?page=" . $page_no;
+    $url = "../index.php?page=" . $page_no;
     header('Location: ' . $url, true, 301);

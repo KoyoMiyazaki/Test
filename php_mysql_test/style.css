@@ -105,25 +105,24 @@ button {
     cursor: pointer;
 }
 
-#register-button, #add-button {
+button:hover {
+    opacity: 0.8;
+}
+
+#register-button,
+#add-page-button {
     background-color: #0d6efd;
+}
+
+#remove-page-button {
+    background-color: #dc3545;
+    margin-left: 10px;  
 }
 
 .update-button {
     color: #0d6efd;
     background-color: white;
     border: 1px solid #0d6efd;
-}
-
-#remove-button {
-    background-color: #dc3545;
-    margin-left: 10px;  
-}
-
-#register-button:hover,
-#add-button:hover,
-#remove-button:hover {
-    opacity: 0.8;
 }
 
 .update-button:hover {
@@ -140,12 +139,27 @@ button {
     margin-top: 10px;
 }
 
-#add-button,
-#remove-button {
+#add-page-button,
+#remove-page-button {
     padding: 12px;
 }
 
 /* 統計情報 */
 .stats td {
     width: 100px;
+}
+
+/* エクスポート */
+.data-export {
+    display: flex;
+}
+
+.export-wrapper {
+    margin-right: 40px;
+}
+
+#export-data_table-button,
+#export-user-button {
+    background-color: #0d6efd;
+    padding: 12px;
 }

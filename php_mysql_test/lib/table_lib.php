@@ -4,6 +4,36 @@ require_once('./lib/database_lib.php');
 
 use database_lib;
 
+// 
+function get_active_page($table_data)
+{
+    $num_page = count($table_data);
+    $num_row = count($table_data[0]);
+    $active_page_flag = false;
+
+    for ($i = $num_page; $i >= 1; $i--) {
+        for ($j = 0; $j < $num_row; $j++) {
+            if ($table_data[$i-1][$j]["ticket"] == "") {
+                $active_page_flag = true;
+            }
+        }
+        if ($active_page_flag == true) {
+            return $i;
+        }
+    }
+    return 1;
+}
+
+function get_active_row($page_data)
+{
+    $num_row = count($page_data);
+    for ($i = 1; $i <= $num_row; $i++) {
+        if ($page_data[$i-1]["ticket"] == "") {
+            return $i;
+        }
+    }
+}
+
 // テーブルの共通のヘッダを返す
 function get_common_table_header()
 {
@@ -64,7 +94,7 @@ function get_register_table($name, $receipt_date, $class, $ticket, $remarks, $pa
         "<table border='1'>" .
         get_common_table_header() .
         "<tbody>" .
-        "<form action='update_record.php' method='post'>" .
+        "<form action='data_table/update_record.php' method='post'>" .
         "<tr>".
         get_common_table_body($name, $receipt_date, $class, $ticket, $remarks, false) .
         "<input type='hidden' name='page_no' value=" . $page_no . ">" .
@@ -78,18 +108,32 @@ function get_register_table($name, $receipt_date, $class, $ticket, $remarks, $pa
 }
 
 // 登録一覧のHTMLタグを返却する
-function get_registered_table($disp_data, $now_page, $focused_user)
+function get_registered_table($disp_data, $now_page, $active_page, $focused_user)
 {
     $registered_table = 
         "<table border='1'>" .
         get_common_table_header() .
         "<tbody>";
-    foreach ($disp_data as $val) {
+    foreach ($disp_data as $index => $val) {
         $registered_table .= "<form action='index.php?page=" . $now_page . "' method='post'>";
-        if ($focused_user != "" && $focused_user == $val['name']) {
-            $registered_table .= "<tr bgcolor='yellow'>";
-        } else {
-            $registered_table .= "<tr>";
+        if ($focused_user != "") { // 登録蘭画表示されている場合
+            if ($focused_user == $val['name']) {
+                $registered_table .= "<tr bgcolor='yellow'>"; // 編集中の行を強調表示
+            } else {
+                $registered_table .= "<tr>";
+            }
+        } else { // 登録蘭画表示されていない場合
+            if ($now_page == $active_page) {
+                $active_row = get_active_row($disp_data);
+                if ($index == $active_row - 1) {
+                    $registered_table .= "<tr bgcolor='red'>"; // アクティブな行を強調表示
+                } else {
+                    $registered_table .= "<tr>";
+                }
+            } else {
+                $registered_table .= "<tr>";
+            }
+            
         }
         $registered_table .= 
             get_common_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true) .
