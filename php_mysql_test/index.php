@@ -54,6 +54,17 @@
     <!-- メイン部 -->
     <div class="container">
 
+    <!-- ON/OFFエリア -->
+    <h2>使い方</h2>
+    <div class="how-to-use off">
+        <ol>
+            <li>a</li>
+            <li>b</li>
+            <li>c</li>
+        </ol>
+    </div>
+    <button id="on-off-button">ON/OFF</button>
+
     <!-- 登録欄を表示(POSTされている場合) -->
 <?php if (count($_POST) != 0): ?>
     <h2>登録欄</h2>

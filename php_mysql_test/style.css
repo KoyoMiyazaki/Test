@@ -163,3 +163,14 @@ button:hover {
     background-color: #0d6efd;
     padding: 12px;
 }
+
+
+/* 新規追記 */
+#on-off-button {
+    background-color: #0d6efd;
+    padding: 12px;
+}
+
+.off {
+    display: none;
+}

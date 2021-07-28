@@ -25,4 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
             return false;
         }
     }
+
+    const onoffButton = document.getElementById('on-off-button');
+    onoffButton.onclick = () => {
+        var target = document.getElementsByClassName('how-to-use')[0];
+        target.classList.toggle('off');
+    }
 });

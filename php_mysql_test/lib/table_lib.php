@@ -116,13 +116,13 @@ function get_registered_table($disp_data, $now_page, $active_page, $focused_user
         "<tbody>";
     foreach ($disp_data as $index => $val) {
         $registered_table .= "<form action='index.php?page=" . $now_page . "' method='post'>";
-        if ($focused_user != "") { // 登録蘭画表示されている場合
+        if ($focused_user != "") { // 登録欄が表示されている場合
             if ($focused_user == $val['name']) {
                 $registered_table .= "<tr bgcolor='yellow'>"; // 編集中の行を強調表示
             } else {
                 $registered_table .= "<tr>";
             }
-        } else { // 登録蘭画表示されていない場合
+        } else { // 登録欄が表示されていない場合
             if ($now_page == $active_page) {
                 $active_row = get_active_row($disp_data);
                 if ($index == $active_row - 1) {
@@ -168,7 +168,8 @@ function get_pagination($now_page, $max_page)
                 "<span><a href='/index.php?page=2'>2</a>  </span>" .
                 "<span>...  </span>" .
                 "<span><a href='/index.php?page=" . $max_page . "'>" . $max_page . "</a>  </span>";
-        } elseif ($now_page == $max_page) {
+        // } elseif ($now_page == $max_page) {
+        } else {
             $pagination .= 
                 "<span><a href='/index.php?page=1'>1</a>  </span>" .
                 "<span>...  </span>" .
