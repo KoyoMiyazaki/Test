@@ -13,11 +13,21 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // 削除ボタンのイベント追加
+    // ページ追加ボタンのイベント追加
+    const addPageButton = document.getElementById('add-page-button');
+    addPageButton.onclick = () => {
+        if (confirm(`新しいページを追加しますか？`)) {
+            // 削除する(処理は無し)
+        } else {
+            // 削除しない
+            return false;
+        }
+    }
+
+    // ページ削除ボタンのイベント追加
     const nowPage = document.getElementById('now-page').textContent;
-    const removeButton = document.getElementById('remove-page-button');
-    // console.log(nowPage);
-    removeButton.onclick = () => {
+    const removePageButton = document.getElementById('remove-page-button');
+    removePageButton.onclick = () => {
         if (confirm(`${nowPage}ページを削除しますか？`)) {
             // 削除する(処理は無し)
         } else {

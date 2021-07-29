@@ -65,15 +65,7 @@
     </div>
     <button id="on-off-button">ON/OFF</button>
 
-    <!-- 登録欄を表示(POSTされている場合) -->
-<?php if (count($_POST) != 0): ?>
-    <h2>登録欄</h2>
-    <?php if ($_POST["receipt_date"] == ""): ?>
-        <?= table_lib\get_register_table($_POST['name'], date("Y-m-d"), $_POST['class'], $_POST['ticket'], $_POST['remarks'], $_POST['page_no']); ?>
-    <?php else: ?>
-        <?= table_lib\get_register_table($_POST['name'], $_POST['receipt_date'], $_POST['class'], $_POST['ticket'], $_POST['remarks'], $_POST['page_no']); ?>
-    <?php endif; ?>
-<?php endif; ?>
+    
 
     <!-- データをテーブル形式で表示 -->
     <h2>登録情報一覧</h2>

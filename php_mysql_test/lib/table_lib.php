@@ -115,14 +115,16 @@ function get_registered_table($disp_data, $now_page, $active_page, $focused_user
         get_common_table_header() .
         "<tbody>";
     foreach ($disp_data as $index => $val) {
-        $registered_table .= "<form action='index.php?page=" . $now_page . "' method='post'>";
         if ($focused_user != "") { // 登録欄が表示されている場合
             if ($focused_user == $val['name']) {
+                $registered_table .= "<form action='data_table/update_record.php' method='post'>";
                 $registered_table .= "<tr bgcolor='yellow'>"; // 編集中の行を強調表示
             } else {
+                $registered_table .= "<form action='index.php?page=" . $now_page . "' method='post'>";
                 $registered_table .= "<tr>";
             }
         } else { // 登録欄が表示されていない場合
+            $registered_table .= "<form action='index.php?page=" . $now_page . "' method='post'>";
             if ($now_page == $active_page) {
                 $active_row = get_active_row($disp_data);
                 if ($index == $active_row - 1) {
@@ -135,9 +137,17 @@ function get_registered_table($disp_data, $now_page, $active_page, $focused_user
             }
             
         }
+
+        if ($focused_user != "" && $focused_user == $val['name']) {
+            $registered_table .=
+                get_common_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], false) .
+                "<td class='non-border-td'><button id='register-button' type='submit'>登録</button></td>";
+        } else {
+            $registered_table .=
+                get_common_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true) .
+                "<td class='non-border-td'><button class='update-button' type='submit'>更新</button></td>";
+        }
         $registered_table .= 
-            get_common_table_body($val['name'], $val['receipt_date'], $val['class'], $val['ticket'], $val['remarks'], true) .
-            "<td class='non-border-td'><button class='update-button' type='submit'>更新する</button></td>" .
             "<input type='hidden' name='page_no' value=" . $val['page_no'] . ">" .
             "</tr>" .
             "</form>";
@@ -152,7 +162,7 @@ function get_registered_table($disp_data, $now_page, $active_page, $focused_user
 // ページネーション用のHTMLタグを返却する
 function get_pagination($now_page, $max_page) 
 {
-    $pagination = "";
+    $pagination = "<span>Newer</span>";
     if ($max_page >= 4) { // ページ数が4以上の場合
         if ($now_page != 1 && $now_page != $max_page) {
             $pagination .= "<span><a href='/index.php?page=1'>1</a>  </span>";
@@ -185,6 +195,7 @@ function get_pagination($now_page, $max_page)
             }
         }
     }
+    $pagination .= "<span>Older</span>";
     $pagination .= "<span class='pseudo-span'></span>";
 
     return $pagination;

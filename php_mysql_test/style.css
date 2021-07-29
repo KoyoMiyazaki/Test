@@ -95,6 +95,11 @@ span {
     border-bottom: none;
 }
 
+#now-page {
+    color: white;
+    background-color: #4b56d2;
+}
+
 /* ボタンのcss */
 button {
     color: white;
