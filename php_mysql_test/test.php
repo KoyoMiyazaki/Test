@@ -1,27 +1,15 @@
-<?php
-function flash($type, $message)
-{
-    global $flash;
-    $_SESSION['flash'][$type] = $message;
-    $flash[$type] = $message;
-}
-?>
-
-<?php
- 
-@session_start();
-$flash = isset($_SESSION['flash']) ? $_SESSION['flash'] : array();
-unset($_SESSION['flash']);
-
-flash('error', 'ログインエラーですね！ もう一度お試しください。');
-
-foreach(array('default', 'error', 'warning') as $key) {
-    if(strlen(@$flash[$key])){
-        ?>
-            <div class="flash flash-<?php echo $key ?>">
-                <?php echo $flash[$key] ?>
-            </div>
-        <?php
-    }
-}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Test Page</h1>
+    <button>
+        <a href="./export.php">エクスポート</a>
+    </button>
+</body>
+</html>
