@@ -233,3 +233,31 @@ function get_stats_table()
 
     return $stats_table;
 }
+
+function get_user_table()
+{
+    $users = database_lib\get_users();
+    $user_table =
+        "<table border='1'>" .
+        "<thead>" .
+            "<tr>" .
+                "<th>名前</th>" .
+                "<th>順序</th>" .
+            "</tr>" .
+        "</thead>" .
+        "<tbody>";
+    
+    foreach ($users as $user) {
+        $user_table .=
+            "<tr>" .
+                "<td>" . $user["name"] . "</td>" .
+                "<td>" . $user["primary_order"] . "</td>" .
+            "</tr>";
+    }
+
+    $user_table .=
+        "</tbody>" .
+        "</table>";
+    
+    return $user_table;
+}

@@ -49,7 +49,7 @@
             return 0;
         }
         return ($user_order[$a["name"]] < $user_order[$b["name"]]) ? -1 : 1;
-    };
+    }
 
     usort($disp_data, 'sort_by_primary');
     echo "<h3>ソート後</h3>";

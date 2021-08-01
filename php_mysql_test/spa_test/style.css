@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+}
+
+.card {
+    display: flex;
+    width: 100px;
+    /* height: 100px; */
+    /* line-height: 100px; */
+    /* vertical-align: middle; */
+    background-color: #cccccc;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}

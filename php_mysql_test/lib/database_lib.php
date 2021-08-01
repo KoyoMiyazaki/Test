@@ -59,7 +59,7 @@ function get_num_user()
 // 全ユーザ取得
 function get_users()
 {
-    $sql = "SELECT name FROM user;";
+    $sql = "SELECT * FROM user;";
     $result = exec_reference_sql($sql, "");
     return $result;
 }
@@ -84,4 +84,38 @@ function get_num_classes_per_user($user_name)
 function export_data_table()
 {
     
+}
+
+// 
+
+function sort_by_primary($a, $b) {
+    $user_order = $GLOBALS["user_order_list"];
+    if ($user_order[$a["name"]] === $user_order[$b["name"]]) {
+        return 0;
+    }
+    return ($user_order[$a["name"]] < $user_order[$b["name"]]) ? -1 : 1;
+}
+
+function get_user_order_list()
+{
+    $user_order_list = array();
+    try {
+        $dsn = "mysql:host=mysql;dbname=sample;";
+        $db = new PDO($dsn, 'root', 'pass');
+
+        $sql = "SELECT * FROM user;";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($result as $user) {
+            $user_order_list[$user["name"]] = $user["primary_order"];
+        }
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        exit;
+    }
+
+    return $user_order_list;
 }

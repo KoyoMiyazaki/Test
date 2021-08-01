@@ -20,6 +20,9 @@
     define('MAX', '7'); // Todo: userテーブルから取得する
 
     // 変数設定
+    global $user_order_list;// 追加
+    $user_order_list = database_lib\get_user_order_list();// 追加
+
     $table_data = database_lib\get_table_data();
     $num_table_data = count($table_data) * count($table_data[0]);
     $max_page = ceil($num_table_data / MAX);
@@ -34,7 +37,7 @@
     
     $start_page_no = $now_page - 1;
     $disp_data = $table_data[$start_page_no];
-
+    usort($disp_data, 'database_lib\sort_by_primary'); // 追加
 ?>
     <!-- ナビゲーションバー -->
     <div class="navbar">
@@ -92,15 +95,9 @@
         </form>
     </div>
     
-    <!-- 統計情報確認 -->
-    <h2>統計情報</h2>
-    <div class="stats">
-        <?= table_lib\get_stats_table(); ?>
-    </div>
-
     <!-- ユーザ管理 -->
     <h2>ユーザ管理</h2>
-    <p>ユーザ管理はこちらから</p>
+    <?= table_lib\get_user_table(); ?>
 
     <!-- ユーザ管理 -->
     <h2>データエクスポート</h2>
