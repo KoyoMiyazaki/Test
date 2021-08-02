@@ -2,13 +2,11 @@
 
 require_once('./lib/database_lib.php');
 
-function generate_csv() {
+function generate_csv($fullpath) {
     $sql = "SELECT * FROM data_table;";
     $result = database_lib\exec_reference_sql($sql, "");
 
-    $filename = '/var/www/html/aaa.csv';
-
-    $res = fopen($filename, 'w');
+    $res = fopen($fullpath, 'w');
     if ($res === FALSE) {
         throw new Exception('ファイルの書き込みに失敗しました。');
     }
@@ -30,15 +28,30 @@ function generate_csv() {
     fclose($res);
 }
 
-function download()
+function download_csv($fullpath)
 {
-    $filename = 'aaa.csv';
-    $fullpath = '/var/www/html/aaa.csv';
+    $filename = basename($fullpath);
     header('Content-Type: text/csv');
     header('Content-Length: ' . filesize($fullpath));
     header('Content-Disposition: attachment; filename=' . $filename);
     readfile($fullpath);
 }
 
-generate_csv();
-download();
+function terminate_csv($fullpath)
+{
+    unlink($fullpath);
+}
+
+$now_date = new DateTime('now');
+$now_date->setTimeZone(new DateTimeZone('Asia/Tokyo'));
+
+$filename_base = "export";
+$filename_suffix = "_" . $now_date->format('Y') . $now_date->format('m') . $now_date->format('d');
+$filename_extension = ".csv";
+$filename = $filename_base . $filename_suffix . $filename_extension;
+$directory_base = "/var/www/html/";
+$fullpath = $directory_base . $filename;
+
+generate_csv($fullpath);
+download_csv($fullpath);
+terminate_csv($fullpath);

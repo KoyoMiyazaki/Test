@@ -104,7 +104,8 @@
     <div class="data-export">
         <div class="export-wrapper">
             <p>登録一覧情報</p>
-            <form action='export/export_data_table.php' method='post'>
+            <!-- <form action='export/export_data_table.php' method='post'> -->
+            <form action='export.php' method='post'>
                 <p><button id='export-data_table-button' type='submit'>エクスポート</button></p>
             </form>
         </div>

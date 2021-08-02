@@ -1,18 +1,72 @@
-* {
+@charset "UTF-8";
+
+/* 共通css */
+body {
+    background-color: #b2b6e6;
+    color: #4b56d2;
+}
+
+h1 {
     margin: 0;
 }
 
-.card {
-    display: flex;
-    width: 100px;
-    /* height: 100px; */
-    /* line-height: 100px; */
-    /* vertical-align: middle; */
-    background-color: #cccccc;
-    margin-bottom: 10px;
+h2, h3 {
+    margin-bottom: 8px;
 }
 
-.buttons {
+table {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+select {
+    width: 100px;
+}
+
+.wide-td {
+    width: 200px;
+    /* height: 200px; */
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px 40px 20px 40px;
+    max-width: 1080px;
+    background-color: white;
+}
+
+span {
+    color: rgb(64, 64, 64);
+    padding: 5px 10px 5px 10px;
+    border: 1px solid rgb(128, 128, 128);
+    border-right: none;
+}
+
+
+/* ボタンのcss */
+button {
+    font-size: 0.8rem;
+    padding: 6px 10px 6px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.non-border-td {
+    border: none;
+}
+
+
+/* 新規スタイル */
+.up-down-button {
     display: flex;
     flex-direction: column;
+}
+
+.result {
+    margin-top: 50px;
 }
