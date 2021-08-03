@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>アプリ | メイン画面</title>
     <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="animate.css"> -->
     <script src="./confirm.js"></script>
 </head>
 <body>
@@ -40,7 +41,7 @@
     usort($disp_data, 'database_lib\sort_by_primary'); // 追加
 ?>
     <!-- ナビゲーションバー -->
-    <div class="navbar">
+    <!-- <div class="navbar">
     <div class="navbar-content">
     <h1>アプリ</h1>
     <ul>
@@ -48,12 +49,14 @@
         <li><a href="">ユーザ管理</a></li>
     </ul>
     </div>
-    </div>
+    </div> -->
 
     <!-- フラッシュメッセージ -->
 <?php
 ?>
 
+    <div class="sub-body">
+    
     <!-- メイン部 -->
     <div class="container">
 
@@ -130,10 +133,27 @@
     // echo "<p><input type='submit' value='ユーザデータ参照'></p>";
     // echo "</form>";
 ?>
+    <!-- アニメーション -->
+    <!-- <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+    </div > -->
+
+    </div>
     </div>
 
     <!-- フッター -->
-    <div class="footer">
-    </div>
+    <!-- <div class="footer">
+    </div> -->
 </body>
 </html>

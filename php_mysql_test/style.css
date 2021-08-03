@@ -1,9 +1,35 @@
 @charset "UTF-8";
 
 /* 共通css */
-body {
+/* body {
     background-color: #b2b6e6;
     color: #4b56d2;
+} */
+
+body {
+    margin: 0;
+}
+
+.sub-body {
+	width: 100%;
+	height: 100%;
+    padding: 40px 0;
+	background:linear-gradient(45deg, #3bade3,#9844b7,#44ea76);
+    /* background: linear-gradient(45deg, #93cfec,#d7a9e8,#99e4af); */
+	background-size: 200% 200%;
+	animation: bggradient 20s ease infinite;
+}
+
+@keyframes bggradient{
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 h1 {
@@ -27,7 +53,8 @@ select {
     margin: 0 auto;
     padding: 20px 40px 20px 40px;
     max-width: 1080px;
-    background-color: white;
+    border-radius: 10px;
+    background-color: #f5f5f5;
 }
 
 .footer {
