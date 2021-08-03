@@ -2,20 +2,44 @@
 
 window.addEventListener("load", function() {
     // 実行したい処理
-    console.log(new Date());
- });
+});
 
-var result = document.querySelector('.result');
+let result = document.querySelector('.result');
+let registerButton = document.querySelector('#register-button');
+let upButtons = document.querySelectorAll('.up-button');
+let downButtons = document.querySelectorAll('.down-button');
 
-var upButtons = document.querySelectorAll('.up-button');
-// console.log(upButtons[0].closest('.card').querySelector('.card-text').textContent);
+registerButton.addEventListener('click', function() {
+    let form = registerButton.closest('tbody').querySelector('form');
+    console.log(form);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'register_user.php');
+    xhr.onload = function() {
+        result.innerHTML = xhr.response;
+        window.location.reload();
+    };
+    xhr.send(new FormData(form));
+});
 
 upButtons.forEach((button) => {
     button.addEventListener('click', function() {
-        var form = button.closest('tr').querySelector('form');
-        // var form = document.querySelector('form');
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'sample.php');
+        let form = button.closest('tr').querySelector('form');
+        // let form = document.querySelector('form');
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'up_primary_order.php');
+        xhr.onload = function() {
+            result.innerHTML = xhr.response;
+            window.location.reload();
+        };
+        xhr.send(new FormData(form));
+    })
+});
+
+downButtons.forEach((button) => {
+    button.addEventListener('click', function() {
+        let form = button.closest('tr').querySelector('form');
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'down_primary_order.php');
         xhr.onload = function() {
             result.innerHTML = xhr.response;
             window.location.reload();

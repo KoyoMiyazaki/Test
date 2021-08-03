@@ -24,38 +24,6 @@
         <?= my_lib\get_user_table(); ?>
       <?php endif; ?>
       </div>
-      <!-- <div class="card">
-        <p class="card-text">1</p>
-        <div class="buttons">
-          <form>
-            <input type="hidden" name="value" value="1" />
-          </form>
-          <button class="up-button">↑</button>
-          <button class="down-button">↓</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <p class="card-text">2</p>
-        <div class="buttons">
-          <form>
-            <input type="hidden" name="value" value="2" />
-          </form>
-          <button class="up-button">↑</button>
-          <button class="down-button">↓</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <p class="card-text">3</p>
-        <div class="buttons">
-          <form>
-            <input type="hidden" name="value" value="3" />
-          </form>
-          <button class="up-button">↑</button>
-          <button class="down-button">↓</button>
-        </div>
-      </div> -->
 
     </div>
     <script src="main.js"></script>

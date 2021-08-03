@@ -8,14 +8,15 @@
 
 body {
     margin: 0;
+    color: #4b56d2;
 }
 
 .sub-body {
 	width: 100%;
 	height: 100%;
     padding: 40px 0;
-	background:linear-gradient(45deg, #3bade3,#9844b7,#44ea76);
-    /* background: linear-gradient(45deg, #93cfec,#d7a9e8,#99e4af); */
+	/* background:linear-gradient(45deg, #3bade3,#9844b7,#44ea76); */
+    background: linear-gradient(45deg, #93cfec,#d7a9e8,#99e4af);
 	background-size: 200% 200%;
 	animation: bggradient 20s ease infinite;
 }

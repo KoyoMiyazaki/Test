@@ -47,20 +47,18 @@ function get_user_registration()
     "<table border='1'>" .
     "<thead>" .
         "<tr>" .
-            "<th>順序</th>" .
             "<th>名前</th>" .
         "</tr>" .
     "</thead>" .
     "<tbody>" .
-        "<form>" .
         "<tr>" .
-            "<td><input type='number' name='primary_order'></td>" .
+        "<form>" .
             "<td><input type='text' name='name'></td>" .
+        "</form>" .
             "<td class='non-border-td'>" .
-                "<button>登録</button>" .
+                "<button id='register-button'>登録</button>" .
             "</td>" .
         "</tr>" .
-        "</form>" .
     "</tbody>" .
     "</table>";
     
