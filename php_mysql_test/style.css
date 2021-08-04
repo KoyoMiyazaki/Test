@@ -209,8 +209,8 @@ button:hover {
 }
 
 .how-to-use {
-    /* text-align: center; */
-    background-color: #fff3e3;
+    background-color: #fdf9ee;
+    box-shadow: 2px 2px 10px 0px #dddddd;
     border-radius: 10px;
     line-height: 0;
     height: 0;

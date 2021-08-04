@@ -94,15 +94,17 @@ function get_user_table()
                 "</td>" .
                 
                 "<form>" .
+                    "<input type='hidden' name='name' value='" . $user["name"] . "'>" .
+                "</form>" .
                 "<td class='non-border-td'>" .
                     "<button>編集</button>" .
                 "</td>" .
-                "</form>" .
                 "<form>" .
-                "<td class='non-border-td'>" .
-                    "<button>削除</button>" .
-                "</td>" .
+                    "<input type='hidden' name='name' value='" . $user["name"] . "'>" .
                 "</form>" .
+                "<td class='non-border-td'>" .
+                    "<button class='remove-button'>削除</button>" .
+                "</td>" .
             "</tr>";
     }
 

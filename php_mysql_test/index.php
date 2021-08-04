@@ -78,9 +78,6 @@
         </ol>
     </div>
     
-
-    
-
     <!-- データをテーブル形式で表示 -->
     <h2>登録情報一覧</h2>
     <?php if (count($_POST) != 0 && $_POST['name']): ?>
@@ -107,10 +104,6 @@
     </div>
     
     <!-- ユーザ管理 -->
-    <h2>ユーザ管理</h2>
-    <?= table_lib\get_user_table(); ?>
-
-    <!-- ユーザ管理 -->
     <h2>データエクスポート</h2>
     <div class="data-export">
         <div class="export-wrapper">
@@ -127,35 +120,6 @@
             </form>
         </div>
     </div>
-
-<?php
-    // echo "<form action='add_testdata.php' method='post'>";
-    // echo "<p><input type='submit' value='テストデータ追加'></p>";
-    // echo "</form>";
-    
-    // echo "<form action='show_testdata.php' method='post'>";
-    // echo "<p><input type='submit' value='テストデータ参照'></p>";
-    // echo "</form>";
-    
-    // echo "<form action='show_userdata.php' method='post'>";
-    // echo "<p><input type='submit' value='ユーザデータ参照'></p>";
-    // echo "</form>";
-?>
-    <!-- アニメーション -->
-    <!-- <div class="area" >
-            <ul class="circles">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-            </ul>
-    </div > -->
 
     </div>
     </div>

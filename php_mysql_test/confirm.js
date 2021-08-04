@@ -36,12 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    
-    // onoffButton.onclick = () => {
-    //     var target = document.getElementsByClassName('how-to-use')[0];
-    //     target.classList.toggle('off');
-    // }
-
     const onoffButton = document.getElementById('on-off-button');
     onoffButton.onclick = () => {
         const content = onoffButton.nextElementSibling;
