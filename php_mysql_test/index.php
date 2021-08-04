@@ -30,7 +30,6 @@
     $active_page = table_lib\get_active_page($table_data);
 
     if (!isset($_GET['page'])) {
-        // $now_page = 1;
         $now_page = $active_page;
     } else {
         $now_page = intval($_GET['page']);
@@ -51,25 +50,34 @@
     </div>
     </div> -->
 
-    <!-- フラッシュメッセージ -->
-<?php
-?>
-
     <div class="sub-body">
     
     <!-- メイン部 -->
     <div class="container">
 
+    <!-- フラッシュメッセージ -->
+    <!-- <?php
+        if (isset($_SESSION)) {
+            echo "<p>セッションはすでに開始されている</p>";
+        } else {
+            @session_start();
+            echo "<p>セッション開始</p>";
+            $_SESSION["message_type"] = "none";
+        }
+    ?>
+    <?= var_dump($_SESSION); ?> -->
+
     <!-- ON/OFFエリア -->
     <h2>使い方</h2>
-    <div class="how-to-use off">
+    <button id="on-off-button">ON/OFF</button>
+    <div class="how-to-use">
         <ol>
-            <li>a</li>
-            <li>b</li>
-            <li>c</li>
+            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias ipsum perferendis ea voluptates. Est, debitis deserunt exercitationem tempore repellat quis sit! Repellat tenetur, quasi ut id corrupti delectus non. Animi!</li>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus in, commodi, odio perferendis, eos delectus neque voluptate eaque adipisci cupiditate ut. Voluptatum, ad. A laboriosam natus, deleniti consequuntur nam laudantium!</li>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur voluptatibus officia velit repudiandae, facilis dolorem nisi sint quo pariatur, est obcaecati. Exercitationem rerum optio facilis, modi ullam similique sit odio?</li>
         </ol>
     </div>
-    <button id="on-off-button">ON/OFF</button>
+    
 
     
 

@@ -19,5 +19,6 @@
         exit;
     }
 
+    $_SESSION["message_type"] = "success";
     $url = 'http://localhost/index.php';
     header('Location: ' . $url, true, 301);
