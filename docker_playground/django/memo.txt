@@ -1,0 +1,8 @@
+・データベース作成について
+以下はPostgreSQLインストール時のデフォルト設定
+'NAME': 'postgres',
+'USER': 'postgres',
+'PASSWORD' : 'postgres',
+'HOST' : 'db',
+'PORT' : 5432,
+
