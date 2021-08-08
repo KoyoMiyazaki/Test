@@ -1,3 +1,5 @@
 .env
 *.log
+.pyc
 php_mysql_test/mysql/mysql_data/
+.idea/

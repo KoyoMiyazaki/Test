@@ -1,0 +1,21 @@
+version: '3'
+ 
+services:
+  db:
+    image: postgres
+    ports:
+        - "5432:5432"
+    environment:
+        POSTGRES_PASSWORD: postgres
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./private_diary:/code
+    ports:
+      - "8000:8000"
+    environment:
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+    depends_on:
+      - db
