@@ -3,8 +3,10 @@ version: '3'
 services:
   db:
     image: postgres
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
     ports:
-        - "5432:5432"
+      - "5432:5432"
     environment:
         POSTGRES_PASSWORD: postgres
   web:
@@ -14,5 +16,8 @@ services:
       - ./micropost_app:/code
     ports:
       - "8000:8000"
+    environment:
+        DB_USER: postgres
+        DB_PASSWORD: postgres
     depends_on:
       - db
