@@ -3,3 +3,9 @@ from django.views import generic
 
 class IndexView(generic.TemplateView):
     template_name = "index.html"
+
+class HomeView(generic.TemplateView):
+    template_name = "home.html"
+
+class HelpView(generic.TemplateView):
+    template_name = "help.html"
