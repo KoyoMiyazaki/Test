@@ -33,3 +33,12 @@ class TestAboutView(BaseTestCase):
         response = self.client.get(reverse_lazy('micropost:about'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<title>About | {}</title>'.format(self.base_title))
+
+class TestContactView(BaseTestCase):
+    """ContactView用のテストクラス"""
+
+    def test_should_get_contact(self):
+        """Contactページへのアクセスが成功することを検証する"""
+        response = self.client.get(reverse_lazy('micropost:contact'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<title>Contact | {}</title>'.format(self.base_title))

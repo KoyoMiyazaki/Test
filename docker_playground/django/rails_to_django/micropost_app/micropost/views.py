@@ -12,3 +12,6 @@ class HelpView(generic.TemplateView):
 
 class AboutView(generic.TemplateView):
     template_name = "about.html"
+
+class ContactView(generic.TemplateView):
+    template_name = "contact.html"
