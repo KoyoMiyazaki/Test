@@ -10,6 +10,11 @@ class BaseTestCase(TestCase):
 class TestHomeView(BaseTestCase):
     """HomeView用のテストクラス"""
 
+    def test_should_get_root(self):
+        """ルートページ(Homeページ)へのアクセスが成功することを検証する"""
+        response = self.client.get(reverse_lazy('micropost:index'))
+        self.assertEqual(response.status_code, 200)
+
     def test_should_get_home(self):
         """Homeページへのアクセスが成功することを検証する"""
         response = self.client.get(reverse_lazy('micropost:home'))
