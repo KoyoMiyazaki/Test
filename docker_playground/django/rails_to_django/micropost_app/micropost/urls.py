@@ -17,8 +17,10 @@ from django.urls import path
 
 from . import views
 
+app_name = 'micropost'
 urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
-    path('home/', views.HomeView.as_view(), name="index"),
-    path('help', views.HelpView.as_view(), name="index"),
+    path('home/', views.HomeView.as_view(), name="home"),
+    path('help/', views.HelpView.as_view(), name="help"),
+    path('about/', views.AboutView.as_view(), name="about"),
 ]

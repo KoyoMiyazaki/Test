@@ -9,3 +9,6 @@ class HomeView(generic.TemplateView):
 
 class HelpView(generic.TemplateView):
     template_name = "help.html"
+
+class AboutView(generic.TemplateView):
+    template_name = "about.html"
