@@ -1,10 +1,37 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/css/bootstrap.min.css' %}">
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+        </script>
+    <![endif]-->
 </head>
 <body>
-    {% block contents %}{% endblock %}
+    <header class="navbar fixed-top navbar-dark">
+        <div class="container">
+            <a id="logo" href="#">sample app</a>
+            <nav>
+                <ul class="nav navbar-nav ms-auto">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Log in</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        {% block contents %}{% endblock %}
+    </div>
 </body>
 </html>

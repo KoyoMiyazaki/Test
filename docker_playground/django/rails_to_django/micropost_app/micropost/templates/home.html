@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Home | Rails Tutorial Sample App{% endblock %}
+{% block title %}Rails Tutorial Sample App{% endblock %}
 
 {% block contents %}
-<h1>Sample App</h1>
-<p>
-    This is the home page for the
-    <a href="https://railstutorial.jp/">Rails Tutorial by Django!</a>
-    sample application.
-</p>
+
+<div class="center bg-light p-5 my-4 rounded">
+    <h1>Welcome to the Sample App</h1>
+
+    <h2>
+        This is the home page for the
+        <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
+        sample application.
+    </h2>
+
+    <a class="btn btn-lg btn-primary" href="#">Sign up now!</a>
+</div>
+
+<a href="http://rubyonrails.org/"><img src="{% static 'assets/images/rails.png' %}" alt="Rails logo"></a>
 {% endblock %}

@@ -19,7 +19,7 @@ class TestHomeView(BaseTestCase):
         """Homeページへのアクセスが成功することを検証する"""
         response = self.client.get(reverse_lazy('micropost:home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<title>Home | {}</title>'.format(self.base_title))
+        self.assertContains(response, '<title>{}</title>'.format(self.base_title))
 
 class TestHelpView(BaseTestCase):
     """HelpView用のテストクラス"""
