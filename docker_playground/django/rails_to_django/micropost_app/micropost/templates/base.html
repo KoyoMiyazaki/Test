@@ -21,19 +21,7 @@
     <![endif]-->
 </head>
 <body>
-    <!-- <header class="navbar fixed-top navbar-dark bg-dark">
-        <div class="container">
-            <a id="logo" href="#">sample app</a>
-            <nav>
-                <ul class="nav navbar-nav me-auto">
-                    <li class="nav-item"><a href="#">Home</a></li>
-                    <li class="nav-item"><a href="#">Help</a></li>
-                    <li class="nav-item"><a href="#">Log in</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header> -->
-
+    <!-- navbar -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a id="logo" class="navbar-brand" href="#">sample app</a>
@@ -43,10 +31,25 @@
                 <a class="nav-link" href="#">Log in</a>
             </div>
         </div>
-      </nav>
+    </nav>
 
     <div class="container">
+        <!-- main content -->
         {% block contents %}{% endblock %}
+        <!-- footer -->
+        <footer class="footer">
+            <small>
+                The <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
+                by <a href="http://www.michaelhartl.com/">Michael Hartl</a>
+            </small>
+            <nav>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="http://news.railstutorial.org/">News</a></li>
+                </ul>
+            </nav>
+        </footer>
     </div>
 </body>
 </html>
