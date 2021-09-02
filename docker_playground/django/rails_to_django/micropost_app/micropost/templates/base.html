@@ -24,10 +24,10 @@
     <!-- navbar -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a id="logo" class="navbar-brand" href="#">sample app</a>
+            <a id="logo" class="navbar-brand" href="{% url 'micropost:home' %}">sample app</a>
             <div class="navbar-nav">
-                <a class="nav-link" href="#">Home</a>
-                <a class="nav-link" href="#">Help</a>
+                <a class="nav-link" href="{% url 'micropost:home' %}">Home</a>
+                <a class="nav-link" href="{% url 'micropost:help' %}">Help</a>
                 <a class="nav-link" href="#">Log in</a>
             </div>
         </div>
@@ -45,7 +45,7 @@
             <nav>
                 <ul>
                     <li><a href="{% url 'micropost:about' %}">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{% url 'micropost:contact' %}">Contact</a></li>
                     <li><a href="http://news.railstutorial.org/">News</a></li>
                 </ul>
             </nav>
