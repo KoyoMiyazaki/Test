@@ -19,8 +19,7 @@ from . import views
 
 app_name = 'micropost'
 urlpatterns = [
-    path('', views.HomeView.as_view(), name="index"),
-    path('home/', views.HomeView.as_view(), name="home"),
+    path('', views.HomeView.as_view(), name="home"),
     path('help/', views.HelpView.as_view(), name="help"),
     path('about/', views.AboutView.as_view(), name="about"),
     path('contact/', views.ContactView.as_view(), name="contact"),
