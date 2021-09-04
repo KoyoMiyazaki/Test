@@ -12,4 +12,4 @@ class TestSiteLayout(SimpleTestCase):
         self.assertContains(response, 'href="{}"'.format(reverse_lazy('micropost:help')), 1)
         self.assertContains(response, 'href="{}"'.format(reverse_lazy('micropost:about')), 1)
         self.assertContains(response, 'href="{}"'.format(reverse_lazy('micropost:contact')), 1)
-        
+        self.assertContains(response, 'href="{}"'.format(reverse_lazy('micropost:users_signup')), 1)
