@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.urls import path
 
-from . import views
+from .views import static_pages_view
+from .views import users_view
 
 app_name = 'micropost'
 urlpatterns = [
-    path('', views.HomeView.as_view(), name="home"),
-    path('help/', views.HelpView.as_view(), name="help"),
-    path('about/', views.AboutView.as_view(), name="about"),
-    path('contact/', views.ContactView.as_view(), name="contact"),
+    path('', static_pages_view.HomeView.as_view(), name="home"),
+    path('help/', static_pages_view.HelpView.as_view(), name="help"),
+    path('about/', static_pages_view.AboutView.as_view(), name="about"),
+    path('contact/', static_pages_view.ContactView.as_view(), name="contact"),
+    path('signup/', users_view.UsersView.as_view(), name="users_signup"),
 ]
