@@ -12,7 +12,7 @@ class TestHomeView(BaseTestCase):
 
     def test_should_get_home(self):
         """Homeページへのアクセスが成功することを検証する"""
-        response = self.client.get(reverse_lazy('micropost:home'))
+        response = self.client.get(reverse_lazy('micropost:static_pages_home'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<title>{}</title>'.format(self.base_title))
 
@@ -21,7 +21,7 @@ class TestHelpView(BaseTestCase):
 
     def test_should_get_help(self):
         """Helpページへのアクセスが成功することを検証する"""
-        response = self.client.get(reverse_lazy('micropost:help'))
+        response = self.client.get(reverse_lazy('micropost:static_pages_help'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<title>Help | {}</title>'.format(self.base_title))
 
@@ -30,7 +30,7 @@ class TestAboutView(BaseTestCase):
 
     def test_should_get_about(self):
         """Aboutページへのアクセスが成功することを検証する"""
-        response = self.client.get(reverse_lazy('micropost:about'))
+        response = self.client.get(reverse_lazy('micropost:static_pages_about'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<title>About | {}</title>'.format(self.base_title))
 
@@ -39,6 +39,6 @@ class TestContactView(BaseTestCase):
 
     def test_should_get_contact(self):
         """Contactページへのアクセスが成功することを検証する"""
-        response = self.client.get(reverse_lazy('micropost:contact'))
+        response = self.client.get(reverse_lazy('micropost:static_pages_contact'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<title>Contact | {}</title>'.format(self.base_title))

@@ -20,9 +20,9 @@ from .views import users_view
 
 app_name = 'micropost'
 urlpatterns = [
-    path('', static_pages_view.HomeView.as_view(), name="home"),
-    path('help/', static_pages_view.HelpView.as_view(), name="help"),
-    path('about/', static_pages_view.AboutView.as_view(), name="about"),
-    path('contact/', static_pages_view.ContactView.as_view(), name="contact"),
+    path('', static_pages_view.HomeView.as_view(), name="static_pages_home"),
+    path('help/', static_pages_view.HelpView.as_view(), name="static_pages_help"),
+    path('about/', static_pages_view.AboutView.as_view(), name="static_pages_about"),
+    path('contact/', static_pages_view.ContactView.as_view(), name="static_pages_contact"),
     path('signup/', users_view.UsersView.as_view(), name="users_signup"),
 ]
