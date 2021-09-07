@@ -38,3 +38,14 @@ class TestUserModel(TestCase):
         with self.assertRaisesMessage(DataError, 'value too long for type character'):
             self.user.email = "a" * 244 + "@example.com"
             self.user.save()
+    
+    def test_email_validation_should_accept_valid_addresses(self):
+        self.user.email = "a" * 10
+        self.user.save()
+        # with self.assertRaisesMessage(DataError, 'value too long for type character'):
+        #     self.user.email = "a" * 10
+        #     self.user.save()
+    
+    def test_email_addresses_should_be_unique(self):
+        with self.assertRaisesMessage(IntegrityError, 'duplicate key value violates unique constraint'):
+            User.objects.create(name="Test User2", email=self.user.email)

@@ -7,6 +7,7 @@ class User(models.Model):
     name = models.CharField(verbose_name='name',
                             max_length=50)
     email = models.EmailField(verbose_name='email',
+                              unique=True,
                               max_length=255,
                               validators=[RegexValidator(r'^[\w+\-.]+@[a-zA-Z\d\-.]+\.[a-zA-Z]+$', 'メールアドレスの形式ではない')])
     created_at = models.DateTimeField(verbose_name='created_at',
